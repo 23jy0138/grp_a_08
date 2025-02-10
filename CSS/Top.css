@@ -1,0 +1,49 @@
+/* 全体の基本設定 */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  /* タイトル部分のスタイル */
+  h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  
+  /* 実線（hr）のデザイン */
+.divider {
+    border: none;
+    border-bottom: 2px solid #000; /* 実線を黒で太さ2px */
+    width: 80%; /* 幅を調整 */
+    margin: 10px auto 30px; /* 上下の余白と中央揃え */
+  }
+  
+  /* コンテナのグリッド設定 */
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2列に設定 */
+    gap: 30px; /* ボタン間のスペース */
+    max-width: 600px; /* 最大幅を設定 */
+    margin: 0 auto; /* 中央揃え */
+  }
+  
+  /* ボタンの基本デザイン */
+  .button {
+    width: 300px; /* グリッドの列幅にフィット */
+    height: 200px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* ホバー時のスタイル */
+  .button:hover {
+    background-color: #bbb;
+  }
+  

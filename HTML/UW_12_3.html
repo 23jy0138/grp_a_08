@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>発注画面</title>
+  <link rel="stylesheet" href="../CSS/発注.css">
+</head>
+<body>
+  <div class="header">
+    <a href="../HTML/UW_12_1.html"><button class="btn">修正</button></a>
+    <h1>発注画面</h1>
+    <a href="../HTML/UW_12_5.html"><button class="btn" id="order-btn">発注</button></a>
+    <a href="../HTML/UW_12_5.html"><button class="btn" id="order-btn">商品発注</button></a>
+  </div>
+
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="商品IDを入力">
+    <a href="../HTML/UW_12_3_S1.html"><button id="search-btn">検索</button></a>
+  </div>
+
+  <div class="sort-area">
+    <label for="sort-stock">在庫数並べ替え: </label>
+    <select id="sort-stock">
+      <option value="asc">昇順</option>
+      <option value="desc">降順</option>
+    </select>
+  </div>
+
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>単価</th>
+        <th>在庫数</th>
+        <th>発注個数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4901234567890</td>
+        <td>商品A</td>
+        <td class="price">¥1000</td>
+        <td class="stock">10</td>
+        <td><input type="text" class="order-quantity" placeholder="発注個数を入力してください"></td>
+      </tr>
+      <tr>
+        <td>4902345678901</td>
+        <td>商品B</td>
+        <td class="price">¥1500</td>
+        <td class="stock">20</td>
+        <td><input type="text" class="order-quantity" placeholder="発注個数を入力してください"></td>
+      </tr>
+      <tr>
+        <td>4903456789012</td>
+        <td>商品C</td>
+        <td class="price">¥2000</td>
+        <td class="stock">15</td>
+        <td><input type="text" class="order-quantity" placeholder="発注個数を入力してください"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // 発注個数の入力欄すべてにフォーマット処理を追加
+    const orderQuantityInputs = document.querySelectorAll(".order-quantity");
+
+    orderQuantityInputs.forEach((input) => {
+      input.addEventListener("keydown", (event) => {
+        // 数字以外が入力されないようにする
+        if (event.key !== "Backspace" && event.key !== "Enter" && isNaN(event.key)) {
+          event.preventDefault();  // 数字以外は入力させない
+        }
+      });
+
+      input.addEventListener("input", (event) => {
+        // 数字以外の文字が入力された場合は、文字を削除する
+        let value = input.value.replace(/[^0-9]/g, ''); // 数字以外を削除
+        input.value = value; // 数字以外を削除した値を設定
+      });
+
+      input.addEventListener("keydown", (event) => {
+        // Enterキーが押されたとき
+        if (event.key === "Enter") {
+          event.preventDefault();  // Enterキーのデフォルト動作を防止
+
+          let value = input.value.replace(/,/g, ""); // カンマを除去
+          
+          if (!isNaN(value) && value !== "") {
+            // 数字の場合にのみ「個」を追加
+            input.value = parseInt(value, 10).toLocaleString("ja-JP") + "個";
+          } else {
+            input.value = ""; // 数字以外の入力があればリセット
+          }
+        }
+      });
+
+      // ダブルクリックで再編集可能にする
+      input.addEventListener("dblclick", () => {
+        input.value = input.value.replace("個", "");  // 「個」を削除して再編集可能に
+      });
+    });
+
+    // 在庫数を昇順・降順で並べ替える関数
+    function sortTable(order) {
+      const table = document.getElementById("product-table");
+      const rows = Array.from(table.rows).slice(1); // ヘッダーを除く行を取得
+
+      // 在庫数を持つ列を基準に並べ替え
+      rows.sort((rowA, rowB) => {
+        const stockA = parseInt(rowA.cells[3].textContent); // 在庫数列
+        const stockB = parseInt(rowB.cells[3].textContent);
+
+        if (order === "asc") {
+          return stockA - stockB; // 昇順
+        } else {
+          return stockB - stockA; // 降順
+        }
+      });
+
+      // 並べ替えた行を再度テーブルに追加
+      rows.forEach(row => table.appendChild(row));
+    }
+
+    // セレクトボックスが変更された時に並べ替えを実行
+    document.getElementById("sort-stock").addEventListener("change", function() {
+      const sortOrder = this.value;
+      sortTable(sortOrder);
+    });
+
+    // 初期並べ替え（デフォルトで昇順）
+    sortTable("asc");
+  </script>
+</body>
+</html>

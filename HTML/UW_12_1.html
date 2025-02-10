@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在庫状況確認画面</title>
+  <link rel="stylesheet" href="../CSS/在庫状況.css">
+</head>
+<body>
+  <div class="header">
+    <a href="Top.html"><button class="btn">戻る</button></a>
+    <h1>在庫状況確認画面</h1>
+    <a href="../HTML/UW_12_3.html"><button class="btn" id="order-btn">発注</button></a>
+  </div>
+
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="商品IDを入力">
+    <a href="../HTML/UW_12_1_S1.html"><button id="search-btn">検索</button></a>
+  </div>
+
+  <div class="sort-area">
+    <label for="sort-stock">在庫数並べ替え: </label>
+    <select id="sort-stock">
+      <option value="asc">昇順</option>
+      <option value="desc">降順</option>
+    </select>
+  </div>
+
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th>価格</th>
+        <th>在庫数</th>
+        <th>チェック欄</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4901234567890</td>
+        <td>商品A</td>
+        <td>食品系</td>
+        <td class="price">100円</td>
+        <td class="stock">10個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4902345678901</td>
+        <td>商品B</td>
+        <td>飲料系</td>
+        <td class="price">150円</td>
+        <td class="stock">20個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4903456789012</td>
+        <td>商品C</td>
+        <td>日用品</td>
+        <td class="price">400円</td>
+        <td class="stock">15個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4904567890123</td>
+        <td>商品D</td>
+        <td>雑誌・本</td>
+        <td class="price">390円</td>
+        <td class="stock">30個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4905678901234</td>
+        <td>商品E</td>
+        <td>健康・美容用品</td>
+        <td class="price">1000円</td>
+        <td class="stock">5個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4906789012345</td>
+        <td>商品F</td>
+        <td>食品系</td>
+        <td class="price">800円</td>
+        <td class="stock">25個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4907890123456</td>
+        <td>商品G</td>
+        <td>飲料系</td>
+        <td class="price">300円</td>
+        <td class="stock">18個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4908901234567</td>
+        <td>商品H</td>
+        <td>日用品</td>
+        <td class="price">350円</td>
+        <td class="stock">12個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4909012345678</td>
+        <td>商品I</td>
+        <td>雑誌・本</td>
+        <td class="price">650円</td>
+        <td class="stock">50個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4910123456789</td>
+        <td>商品J</td>
+        <td>食品系</td>
+        <td class="price">200円</td>
+        <td class="stock">8個</td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // 在庫数を昇順・降順で並べ替える関数
+    function sortTable(order) {
+      const table = document.getElementById("product-table");
+      const rows = Array.from(table.rows).slice(1); // ヘッダーを除く行を取得
+
+      // 在庫数を持つ列を基準に並べ替え
+      rows.sort((rowA, rowB) => {
+        const stockA = parseInt(rowA.cells[4].textContent); // 在庫数列
+        const stockB = parseInt(rowB.cells[4].textContent);
+
+        if (order === "asc") {
+          return stockA - stockB; // 昇順
+        } else {
+          return stockB - stockA; // 降順
+        }
+      });
+
+      // 並べ替えた行を再度テーブルに追加
+      rows.forEach(row => table.appendChild(row));
+    }
+
+    // セレクトボックスが変更された時に並べ替えを実行
+    document.getElementById("sort-stock").addEventListener("change", function() {
+      const sortOrder = this.value;
+      sortTable(sortOrder);
+    });
+
+    // 初期並べ替え（デフォルトで昇順）
+    sortTable("asc");
+  </script>
+</body>
+</html>

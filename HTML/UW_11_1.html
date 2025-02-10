@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品非表示画面</title>
+  <link rel="stylesheet" href="../CSS/UW_08_1.css">
+  <style>
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header .btn {
+      margin-left: 10px; /* ボタン間のスペース */
+    }
+    .button-container {
+      display: flex;
+      justify-content: flex-end; /* 右寄せ */
+      margin: 10px 0; /* 上下のマージン */
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="./Top.html"><button class="btn">戻る</button></a>
+    <h1>商品非表示画面</h1>
+    <a href="./UW_11_5.html"><button class="btn" id="next-btn">次へ</button></a>
+  </div>
+  <div class="button-container">
+    <a href="./UW_11_1_S2.html"><button class="btn" id="hide-list-btn">商品非表示一覧</button></a>
+  </div>
+  <p>バーコードまたはJANコードを入力してください。</p>
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="Placeholder">
+    <a href="./UW_11_1_S1.html"><button id="search-btn">検索</button></a>
+  </div>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th>単価</th>
+        <th>商品非表示</th>
+        <th>備考欄</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ダミーID1</td>
+        <td>ダミー商品名1</td>
+        <td>ダミーカテゴリー1</td>
+        <td>ダミー単価1</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+      <tr>
+        <td>ダミーID2</td>
+        <td>ダミー商品名2</td>
+        <td>ダミーカテゴリー2</td>
+        <td>ダミー単価2</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+      <tr>
+        <td>ダミーID3</td>
+        <td>ダミー商品名3</td>
+        <td>ダミーカテゴリー3</td>
+        <td>ダミー単価3</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+      <tr>
+        <td>ダミーID4</td>
+        <td>ダミー商品名4</td>
+        <td>ダミーカテゴリー4</td>
+        <td>ダミー単価4</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+      <tr>
+        <td>ダミーID5</td>
+        <td>ダミー商品名5</td>
+        <td>ダミーカテゴリー5</td>
+        <td>ダミー単価5</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+      <tr>
+        <td>ダミーID6</td>
+        <td>ダミー商品名6</td>
+        <td>ダミーカテゴリー6</td>
+        <td>ダミー単価6</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+      <tr>
+        <td>ダミーID7</td>
+        <td>ダミー商品名7</td>
+        <td>ダミーカテゴリー7</td>
+        <td>ダミー単価7</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+      <tr>
+        <td>ダミーID8</td>
+        <td>ダミー商品名8</td>
+        <td>ダミーカテゴリー8</td>
+        <td>ダミー単価8</td>
+        <td><input type="checkbox" class="stock-checkbox"><span>非表示</span></td>
+        <td><input type="text" placeholder="備考欄を入力" disabled class="biko-input"></td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    // 検索ボタンのイベントリスナー
+    document.getElementById("search-btn").addEventListener("click", function() {
+      window.location.href = 'UW_11_2_S1.html';
+    });
+
+    // Enterキーで検索
+    document.getElementById("barcode").addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        window.location.href = 'UW_11_2_S1.html';
+      }
+    });
+
+    // チェックボックスのイベントリスナーを追加
+    document.querySelectorAll('.stock-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const inputField = this.closest('tr').querySelector('.biko-input');
+        inputField.disabled = !this.checked; // チェックされている場合は有効化
+      });
+    });
+  </script>
+</body>
+</html>
+
+

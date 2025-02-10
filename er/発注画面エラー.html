@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>発注画面</title>
+  <link rel="stylesheet" href="../CSS/発注エラー.css">
+</head>
+<body>
+  <div class="header">
+    <a href="Top.html"><button class="btn">戻る</button></a>
+    <h1>発注画面</h1>
+    <a href="../HTML/発注完了画面.html"><button class="btn" id="order-btn">発注</button>
+      <a href="../HTML/発注完了画面.html"><button class="btn" id="order-btn">商品発注</button></a>
+  </div>
+
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="商品IDを入力">
+    <a href="../HTML/在庫状況検索結果.html"><button id="search-btn">検索</button></a>
+  </div>
+
+  <div class="er-message">
+    <p>発注個数が未記入の欄があります</p>
+  </div>
+
+  <div class="sort-area">
+    <label for="sort-stock">在庫数並べ替え: </label>
+    <select id="sort-stock">
+      <option value="asc">昇順</option>
+      <option value="desc">降順</option>
+    </select>
+  </div>
+
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>単価</th>
+        <th>在庫数</th>
+        <th>発注個数</th>
+        <th>チェック欄</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4901234567890</td>
+        <td>商品A</td>
+        <td>¥1000</td>
+        <td class="stock">10</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4902345678901</td>
+        <td>商品B</td>
+        <td>¥1500</td>
+        <td class="stock">20</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4903456789012</td>
+        <td>商品C</td>
+        <td>¥2000</td>
+        <td class="stock">15</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4904567890123</td>
+        <td>商品D</td>
+        <td>¥1200</td>
+        <td class="stock">30</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4905678901234</td>
+        <td>商品E</td>
+        <td>¥5000</td>
+        <td class="stock">5</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4906789012345</td>
+        <td>商品F</td>
+        <td>¥800</td>
+        <td class="stock">25</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4907890123456</td>
+        <td>商品G</td>
+        <td>¥3000</td>
+        <td class="stock">18</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4908901234567</td>
+        <td>商品H</td>
+        <td>¥3500</td>
+        <td class="stock">12</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4909012345678</td>
+        <td>商品I</td>
+        <td>¥1000</td>
+        <td class="stock">50</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+      <tr>
+        <td>4910123456789</td>
+        <td>商品J</td>
+        <td>¥7000</td>
+        <td class="stock">8</td>
+        <td><input type="number" class="order-quantity" value="0" min="0"></td>
+        <td><input type="checkbox" class="check-order"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // 在庫数を昇順・降順で並べ替える関数
+    function sortTable(order) {
+      const table = document.getElementById("product-table");
+      const rows = Array.from(table.rows).slice(1); // ヘッダーを除く行を取得
+
+      // 在庫数を持つ列を基準に並べ替え
+      rows.sort((rowA, rowB) => {
+        const stockA = parseInt(rowA.cells[3].textContent); // 在庫数列
+        const stockB = parseInt(rowB.cells[3].textContent);
+
+        if (order === "asc") {
+          return stockA - stockB; // 昇順
+        } else {
+          return stockB - stockA; // 降順
+        }
+      });
+
+      // 並べ替えた行を再度テーブルに追加
+      rows.forEach(row => table.appendChild(row));
+    }
+
+    // セレクトボックスが変更された時に並べ替えを実行
+    document.getElementById("sort-stock").addEventListener("change", function() {
+      const sortOrder = this.value;
+      sortTable(sortOrder);
+    });
+
+    // 初期並べ替え（デフォルトで昇順）
+    sortTable("asc");
+  </script>
+</body>
+</html>

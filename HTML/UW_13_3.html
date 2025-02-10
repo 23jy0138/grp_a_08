@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>納品確認画面</title>
+    <link rel="stylesheet" href="../CSS/UW_08_1.css">
+    <script>
+        function toggleRemarks(checkbox, remarksId) {
+            const remarksField = document.getElementById(remarksId);
+            if (checkbox.checked) {
+                remarksField.disabled = false;
+            } else {
+                remarksField.disabled = true;
+                remarksField.value = ''; // チェックが外れたら入力内容をクリア
+            }
+        }
+
+        function handleDateSelection() {
+            const selectedDate = document.getElementById("dateSelect").value;
+            if (selectedDate) {
+                window.location.href = "./UW_12_S1.html";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <a href="./Top.html"><button class="btn">戻る</button></a>
+        <h1>納品確認画面</h1>
+        <a href="./Top.html"><button class="btn" id="next-btn">トップに戻る</button></a>
+    </div>
+    
+    <div>
+        <h2>納品情報</h2>
+    </div>
+    <table>
+        <tr>
+            <th>予定日</th>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>数量</th>
+        </tr>
+        <tr>
+            <td rowspan="3" class="grouped-date">2024-11-28</td>
+            <td>商品ID1</td>
+            <td>商品名1</td>
+            <td>数量1</td>
+        </tr>
+        <tr>
+            <td>商品ID2</td>
+            <td>商品名2</td>
+            <td>数量2</td>
+        </tr>
+        <tr>
+            <td>商品ID3</td>
+            <td>商品名3</td>
+            <td>数量3</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="grouped-date">2024-11-29</td>
+            <td>商品ID4</td>
+            <td>商品名4</td>
+            <td>数量4</td>
+        </tr>
+        <tr>
+            <td>商品ID5</td>
+            <td>商品名5</td>
+            <td>数量5</td>
+        </tr>
+    </table>
+    <div class="right-align">
+        <p>これらの商品にチェックしました</p>
+    </div>
+<div>
+    <h2>未納品情報</h2>
+</div>
+<table>
+    <table>
+        <tr>
+            <th>予定日</th>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>数量</th>
+            <th>備考欄</th>
+        </tr>
+        <tr>
+            <td rowspan="3" class="grouped-date">2024-11-28</td>
+            <td>商品ID1</td>
+            <td>商品名1</td>
+            <td>数量1</td>
+            <td>xxxx</td>
+        </tr>
+        <tr>
+            <td>商品ID2</td>
+            <td>商品名2</td>
+            <td>数量2</td>
+            <td>xxxx</td>
+        </tr>
+        <tr>
+            <td>商品ID3</td>
+            <td>商品名3</td>
+            <td>数量3</td>
+            <td>xxxx</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="grouped-date">2024-11-29</td>
+            <td>商品ID4</td>
+            <td>商品名4</td>
+            <td>数量4</td>
+            <td>xxxx</td>
+        </tr>
+        <tr>
+            <td>商品ID5</td>
+            <td>商品名5</td>
+            <td>数量5</td>
+            <td>xxxx</td>
+        </tr>
+</table>
+<div class="right-align">
+    <p>これらの情報を送信しました</p>
+</div>
+</body>
+</html>

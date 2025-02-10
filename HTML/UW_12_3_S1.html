@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在庫状況確認画面</title>
+  <link rel="stylesheet" href="../CSS/在庫状況.css">
+</head>
+<body>
+  <div class="header">
+    <a href="Top.html"><button class="btn">戻る</button></a>
+    <h1>在庫状況確認</h1>
+    <a href="../HTML/UW_12_3.html"><button class="btn" id="order-btn">発注</button></a>
+  </div>
+
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="商品IDを入力">
+    <button id="search-btn">検索</button>
+  </div>
+
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th>価格</th>
+        <th>在庫数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4901234567890</td>
+        <td>商品A</td>
+        <td>食品</td>
+        <td>¥1000</td>
+        <td>10</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

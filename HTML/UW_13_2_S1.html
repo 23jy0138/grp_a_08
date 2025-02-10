@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>納品確認画面</title>
+    <link rel="stylesheet" href="../CSS/UW_08_1.css">
+    <script>
+        function toggleRemarks(checkbox, remarksId) {
+            const remarksField = document.getElementById(remarksId);
+            if (checkbox.checked) {
+                remarksField.disabled = true; // チェックがついたら備考欄を無効化
+            } else {
+                remarksField.disabled = false; // チェックが外れたら備考欄を有効化
+            }
+        }
+        function handleDateSelection() {
+            window.location.href = 'UW_13_2_S1.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <a href="./UW_13_1.html"><button class="btn">戻る</button></a>
+        <h1>納品確認画面</h1>
+        <a href="./UW_13_3.html"><button class="btn" id="next-btn">完了</button></a>
+    </div>
+    
+    <div style="text-align: right; margin-bottom: 10px;">
+        <label for="dateSelect">予定日を選択:</label>
+        <input type="date" id="dateSelect" onchange="handleDateSelection()">
+    </div>
+
+    <table>
+        <tr>
+            <th>予定日</th>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>数量</th>
+            <th>チェック欄</th>
+            <th>備考欄</th>
+        </tr>
+        <tr>
+            <td rowspan="3" class="grouped-date">2024-11-28</td>
+            <td>商品ID1</td>
+            <td>商品名1</td>
+            <td>数量1</td>
+            <td><input type="checkbox" onchange="toggleRemarks(this, 'remarks1')"></td>
+            <td><input type="text" id="remarks1"></td> <!-- 初期状態で有効 -->
+        </tr>
+    </table>
+</body>
+</html>

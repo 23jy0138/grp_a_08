@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品値段変更画面</title>
+  <link rel="stylesheet" href="../CSS/UW_08_1.css">
+  <style>
+    /* 追加: 値段入力フィールドを右寄せにするスタイル */
+    #product-table input[type="text"] {
+      text-align: right; /* テキストを右寄せ */
+      width: 80px; /* 幅を小さく設定 */
+    }
+
+    /* 値段列の幅を設定 */
+    #product-table th:nth-child(5), 
+    #product-table td:nth-child(5) {
+      width: 100px; /* 値段列の幅を設定 */
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="Top.html"><button class="btn">戻る</button></a>
+    <h1>商品値段変更画面</h1>
+    <a href="./UW_09_5.html"><button class="btn" id="next-btn">次へ</button></a>
+  </div>
+  <p>バーコードまたはJANコードを入力してください。</p>
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="Placeholder">
+    <button id="add-row-btn">追加</button>
+  </div>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th>単価</th>
+        <th>値段</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 新しい行はここに追加されます -->
+    </tbody>
+  </table>
+  <script>
+    // 行を追加する関数
+    function addRow() {
+      const barcodeInput = document.getElementById("barcode");
+      const barcodeValue = barcodeInput.value.trim();
+     
+      const tableBody = document.querySelector("#product-table tbody");
+      const newRow = document.createElement("tr");
+   
+      // 商品IDセル
+      const idCell = document.createElement("td");
+      idCell.textContent = barcodeValue;
+      newRow.appendChild(idCell);
+   
+      // 商品名セル
+      const nameCell = document.createElement("td");
+      nameCell.textContent = "xxxx"; // ここを変更
+      newRow.appendChild(nameCell);
+   
+      // カテゴリーセル
+      const nameCategory = document.createElement("td");
+      nameCategory.textContent = "xxxx"; // ここを変更
+      newRow.appendChild(nameCategory);
+   
+      // 単価セル
+      const nameprice = document.createElement("td");
+      nameprice.textContent = "xxxx"; // ここを変更
+      newRow.appendChild(nameprice);
+   
+      // 値段セル
+      const stockCell = document.createElement("td");
+      const stockInput = document.createElement("input");
+      stockInput.type = "text"; // typeをnumberからtextに変更
+      stockInput.placeholder = "値段を入力";
+      stockCell.appendChild(stockInput);
+      newRow.appendChild(stockCell);
+
+      const yenLabel = document.createElement("span");
+      yenLabel.textContent = "円";
+      stockCell.appendChild(yenLabel);
+   
+      // カンマを自動的に付けるイベントリスナー
+      stockInput.addEventListener("input", function() {
+        let value = stockInput.value.replace(/,/g, ''); // 既存のカンマを削除
+        if (!isNaN(value) && value !== "") {
+          stockInput.value = Number(value).toLocaleString(); // カンマを付けて再設定
+        } else {
+          stockInput.value = ""; // 数字以外の入力の場合はクリア
+        }
+      });
+
+      // テーブルに新しい行を追加
+      tableBody.appendChild(newRow);
+   
+      // 商品IDフィールドをクリア
+      barcodeInput.value = "";
+   
+      // バーコード入力欄にフォーカス
+      setFocusToBarcodeInput();
+    }
+   
+    // 追加ボタンのイベントリスナー
+    document.getElementById("add-row-btn").addEventListener("click", addRow);
+   
+    // Enterキーで行を追加
+    document.getElementById("barcode").addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        addRow();
+      }
+    });
+   
+    // バーコード入力欄にフォーカスを設定する関数
+    function setFocusToBarcodeInput() {
+      document.getElementById("barcode").focus();
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

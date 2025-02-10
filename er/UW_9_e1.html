@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品値段変更画面</title>
+  <link rel="stylesheet" href="../CSS/UW_08_1.css">
+  <style>
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="Top.html"><button class="btn">戻る</button></a>
+    <h1>商品値段変更画面</h1>
+    <button class="btn" id="next-btn">次へ</button>
+  </div>
+  <p>バーコードまたはJANコードを入力してください。</p>
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="Placeholder">
+    <button id="add-row-btn">追加</button>
+  </div>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th>単価</th>
+        <th>値段</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 新しい行はここに追加されます -->
+    </tbody>
+  </table>
+  <div class="error-message" id="error-message">値段を入力するか、正しい値を設定してください。</div>
+  <script>
+    // エラーを表示する関数
+    function showError(message) {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.textContent = message;
+      errorMessage.style.display = "block";
+    }
+
+    // エラーを隠す関数
+    function hideError() {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.style.display = "none";
+    }
+
+    // 行を追加する関数
+    function addRow() {
+      const barcodeInput = document.getElementById("barcode");
+      const barcodeValue = barcodeInput.value.trim();
+      const tableBody = document.querySelector("#product-table tbody");
+
+      if (barcodeValue === "") {
+        showError("バーコードを入力してください。");
+        return;
+      }
+
+      hideError();
+
+      const newRow = document.createElement("tr");
+
+      // 商品IDセル
+      const idCell = document.createElement("td");
+      idCell.textContent = barcodeValue;
+      newRow.appendChild(idCell);
+
+      // 商品名セル
+      const nameCell = document.createElement("td");
+      nameCell.textContent = "xxxx"; // 仮の値
+      newRow.appendChild(nameCell);
+
+      // カテゴリーセル
+      const categoryCell = document.createElement("td");
+      categoryCell.textContent = "xxxx"; // 仮の値
+      newRow.appendChild(categoryCell);
+
+      // 単価セル
+      const priceCell = document.createElement("td");
+      priceCell.textContent = "xxxx"; // 仮の値
+      newRow.appendChild(priceCell);
+
+      // 値段セル
+      const priceInputCell = document.createElement("td");
+      const priceInput = document.createElement("input");
+      priceInput.type = "number";
+      priceInput.placeholder = "値段を入力";
+      priceInputCell.appendChild(priceInput);
+
+      const yenLabel = document.createElement("span");
+      yenLabel.textContent = "円";
+      priceInputCell.appendChild(yenLabel);
+      newRow.appendChild(priceInputCell);
+
+      // テーブルに新しい行を追加
+      tableBody.appendChild(newRow);
+
+      // 商品IDフィールドをクリア
+      barcodeInput.value = "";
+
+      // バーコード入力欄にフォーカス
+      setFocusToBarcodeInput();
+    }
+
+    // 次へボタンのクリックイベント
+    document.getElementById("next-btn").addEventListener("click", () => {
+      const tableRows = document.querySelectorAll("#product-table tbody tr");
+      let isValid = true;
+
+      // 各行の値段をチェック
+      tableRows.forEach((row) => {
+        const priceInput = row.querySelector("input[type='number']");
+        const priceValue = priceInput.value.trim();
+
+        if (priceValue === "" || Number(priceValue) < 0) {
+          isValid = false;
+          showError("値段を入力するか、正しい値を設定してください。");
+        }
+      });
+
+      if (isValid) {
+        hideError();
+        // 次のページに移動（例: URL遷移）
+        window.location.href = "./UW_09_5.html";
+      }
+    });
+
+    // 追加ボタンのイベントリスナー
+    document.getElementById("add-row-btn").addEventListener("click", addRow);
+
+    // Enterキーで行を追加
+    document.getElementById("barcode").addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        addRow();
+      }
+    });
+
+    // バーコード入力欄にフォーカスを設定する関数
+    function setFocusToBarcodeInput() {
+      document.getElementById("barcode").focus();
+    }
+  </script>
+</body>
+</html>
+

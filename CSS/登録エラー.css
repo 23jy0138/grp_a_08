@@ -1,0 +1,82 @@
+/* 全体のスタイル */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* ヘッダー */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #bbb;
+  }
+  
+  /* 入力エリア */
+  .input-area {
+    margin: 20px 0;
+  }
+  
+  input[type="text"] {
+    padding: 5px;
+    width: 200px;
+  }
+  
+  button {
+    padding: 5px 10px;
+    margin-left: 10px;
+  }
+  
+  /* テーブルのスタイル */
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f0f0f0;
+  }
+  
+  td input[type="text"],
+  td input[type="number"] {
+    width: 90%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  
+  td select {
+    width: 90%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  
+  .add-er {
+    color: #ff0000; /* テキストの色を赤に設定 */
+    font-size: 16px; /* 文字サイズを調整 */
+    font-weight: bold; /* 太字で表示 */
+    text-align: center; /* テキストを中央揃え */
+  }

@@ -1,0 +1,65 @@
+/* 全体のスタイル */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+/* 在庫状況確認タイトルを中央に配置 */
+.header h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+}
+
+/* ボタン */
+.btn {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #bbb;
+}
+
+table {
+    width: 60%;  /* テーブルの幅をさらに小さく設定（これで横幅を狭くします） */
+    margin: 10px auto;  /* 上下の余白を縮小 */
+    border-collapse: collapse;  /* 枠線を重ねて表示 */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 6px;  /* セルの内側の余白を小さくする */
+    text-align: center;  /* 水平方向に中央 */
+    vertical-align: middle;  /* 垂直方向に中央 */
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+/* 発注メッセージのスタイル */
+.order-message {
+    text-align: center;  /* 水平方向に中央 */
+    font-size: 30px;     /* フォントサイズを調整 */
+    margin-top: 20px;    /* テーブルとの間隔を空ける */
+    color: #4CAF50;      /* メッセージの色（緑色） */
+}
+
+/* 価格と在庫数を右寄せ */
+td.price, td.stock {
+    text-align: right;
+  }

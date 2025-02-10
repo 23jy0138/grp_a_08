@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品情報登録確認画面</title>
+  <link rel="stylesheet" href="../CSS/UW_08_1.css">
+  <style>
+    /* 金額と在庫数を右寄せ */
+    td.price, td.stock {
+      text-align: right;
+    }
+    .editable {
+      cursor: pointer;
+      border: 1px dashed transparent;
+    }
+    .editable:hover {
+      border-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="./UW_08_1.html"><button class="btn" id="back-btn">戻る</button></a>
+    <h1>商品情報登録確認画面</h1>
+    <a href="./UW_08_5.html"><button class="btn" id="next-btn">確定</button></a>
+  </div>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th>価格</th>
+        <th>在庫数</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4901234567890</td>
+        <td class="editable-cell" onclick="editCell(this, '商品名')">商品A</td>
+        <td class="editable-cell">
+          <span class="editable" onclick="editCategory(this)">食品系</span>
+        </td>
+        <td class="editable-cell price" onclick="editCell(this, '価格')">1000円</td>
+        <td class="editable-cell stock" onclick="editCell(this, '在庫数')">10個</td>
+        <td><button class="delete-btn">削除</button></td>
+      </tr>
+      <tr>
+        <td>4902345678901</td>
+        <td class="editable-cell" onclick="editCell(this, '商品名')">商品B</td>
+        <td class="editable-cell">
+          <span class="editable" onclick="editCategory(this)">飲料系</span>
+        </td>
+        <td class="editable-cell price" onclick="editCell(this, '価格')">1500円</td>
+        <td class="editable-cell stock" onclick="editCell(this, '在庫数')">20個</td>
+        <td><button class="delete-btn">削除</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // 商品名、価格、在庫数を編集可能にする関数
+    function editCell(cell, type) {
+      const currentValue = cell.textContent.trim();
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = currentValue.replace(/[円個]/g, ""); // "円"や"個"を除去
+
+      // Enterキーで入力を確定
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          confirmInput(input, cell, type);
+        }
+      });
+
+      // 入力フィールドをセルに追加
+      cell.innerHTML = "";
+      cell.appendChild(input);
+      input.focus();
+    }
+
+    // 確定された入力をセルに反映
+    function confirmInput(input, cell, type) {
+      let value = input.value.trim();
+      if (value === "") value = input.placeholder || ""; // 空の場合はプレースホルダーに戻す
+
+      // 価格には"円"、在庫数には"個"を追加
+      if (type === '価格') {
+        value += "円";
+      } else if (type === '在庫数') {
+        value += "個";
+      }
+
+      cell.textContent = value; // セルの内容を更新
+    }
+
+    // カテゴリーを編集可能にする関数
+    function editCategory(span) {
+      const currentCategory = span.textContent.trim();
+
+      // セレクトボックスを作成
+      const select = document.createElement("select");
+      const categories = ["選択してください", "食品系", "飲料系", "日用品", "雑誌・本", "健康・美容用品"];
+      categories.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        if (category === currentCategory) {
+          option.selected = true;
+        }
+        select.appendChild(option);
+      });
+
+      // セレクトボックスの変更で値を更新
+      select.addEventListener("change", (event) => {
+        span.textContent = event.target.value;
+      });
+
+      // セレクトボックスを表示
+      span.innerHTML = ''; // 既存のテキストを削除
+      span.appendChild(select);
+
+      // セレクトボックス内でクリックされた場合、親要素のイベントが発火しないようにする
+      select.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+
+      // セレクトボックスの変更後、選択内容を反映
+      select.addEventListener('blur', () => {
+        span.innerHTML = select.value; // 新しいカテゴリーをテキストとして表示
+      });
+    }
+
+    // 「削除」ボタンがクリックされたとき、その行を削除
+    document.querySelectorAll('.delete-btn').forEach((button) => {
+      button.addEventListener('click', function () {
+        const row = this.closest('tr'); // クリックされたボタンが含まれる行を取得
+        row.remove(); // その行を削除
+      });
+    });
+  </script>
+</body>
+</html>

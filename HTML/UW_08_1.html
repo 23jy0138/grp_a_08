@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品情報登録画面</title>
+  <link rel="stylesheet" href="../CSS/UW_08_1.css">
+  <style>
+    /* 金額と在庫数を右寄せ */
+    td.price, td.stock {
+      text-align: right;
+    }
+    .editable {
+      cursor: pointer;
+      border: 1px dashed transparent;
+    }
+    .editable:hover {
+      border-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="Top.html"><button class="btn">戻る</button></a>
+    <h1>商品情報登録画面</h1>
+    <a href="./UW_08_3.html"><button class="btn" id="next-btn">次へ</button></a>
+  </div>
+  <p>バーコードまたはJANコードを入力してください。</p>
+  <div class="input-area">
+    <label for="barcode">商品ID</label>
+    <input type="text" id="barcode" placeholder="Placeholder">
+    <button id="add-row-btn">追加</button>
+  </div>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th class="price">価格</th>
+        <th class="stock">在庫数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 新しい行はここに追加されます -->
+    </tbody>
+  </table>
+  <script>
+    // 行を追加する関数
+    function addRow() {
+      const barcodeInput = document.getElementById("barcode");
+      const barcodeValue = barcodeInput.value.trim();
+      
+      const tableBody = document.querySelector("#product-table tbody");
+      const newRow = document.createElement("tr");
+
+      // 商品IDセル
+      const idCell = document.createElement("td");
+      idCell.textContent = barcodeValue;
+      newRow.appendChild(idCell);
+
+      // 商品名セル
+      const nameCell = document.createElement("td");
+      createEditableCell(nameCell, "商品名を入力");
+      newRow.appendChild(nameCell);
+
+      // カテゴリーセル
+      const categoryCell = document.createElement("td");
+      const categorySelect = document.createElement("select");
+      const categories = ["選択してください", "食品系", "飲料系", "日用品", "雑誌・本", "健康・美容用品"];
+      categories.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categorySelect.appendChild(option);
+      });
+      categoryCell.appendChild(categorySelect);
+      newRow.appendChild(categoryCell);
+
+      // 価格セル
+      const priceCell = document.createElement("td");
+      createEditableCell(priceCell, "価格を入力", "円");
+      newRow.appendChild(priceCell);
+
+      // 在庫数セル
+      const stockCell = document.createElement("td");
+      createEditableCell(stockCell, "在庫数を入力", "個");
+      newRow.appendChild(stockCell);
+
+      // テーブルに新しい行を追加
+      tableBody.appendChild(newRow);
+
+      // 商品IDフィールドをクリア
+      barcodeInput.value = "";
+
+      // バーコード入力欄にフォーカス
+      setFocusToBarcodeInput();
+    }
+
+    // 編集可能なセルを作成する関数
+    function createEditableCell(cell, placeholder, unit = null) {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.placeholder = placeholder;
+
+      // 三桁ごとにカンマを付与するフォーマット（数値の場合）
+      if (unit) {
+        input.addEventListener("input", (event) => {
+          formatWithCommas(event.target);
+        });
+      }
+
+      // Enterキーで値を確定
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          confirmInput(input, cell, unit);
+        }
+      });
+
+      cell.appendChild(input);
+    }
+
+    // 確定されたテキストを表示し、再編集可能にする関数
+    function confirmInput(input, cell, unit = null) {
+      const value = input.value.trim(); // 入力値を取得
+      const span = document.createElement("span");
+
+      // 値をセットし、単位を追加
+      span.textContent = value === "" ? input.placeholder : value + (unit ? ` ${unit}` : "");
+      span.classList.add("editable");
+
+      // 再編集可能にする
+      span.addEventListener("click", () => {
+        cell.innerHTML = ""; // セルを空に
+        createEditableCell(cell, input.placeholder, unit);
+        const newInput = cell.querySelector("input");
+        newInput.value = value; // 値を復元
+        newInput.focus();
+      });
+
+      cell.innerHTML = ""; // セルを空に
+      cell.appendChild(span); // 確定されたテキストを挿入
+    }
+
+    // 三桁ごとにカンマを付けるフォーマット関数
+    function formatWithCommas(input) {
+      let value = input.value.replace(/,/g, ""); // カンマを一旦除去
+      if (!isNaN(value) && value !== "") {
+        input.value = parseInt(value, 10).toLocaleString("ja-JP");
+      } else {
+        input.value = ""; // 無効な入力はリセット
+      }
+    }
+
+    // 追加ボタンのイベントリスナー
+    document.getElementById("add-row-btn").addEventListener("click", addRow);
+
+    // Enterキーで行を追加
+    document.getElementById("barcode").addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        addRow();
+      }
+    });
+
+    // バーコード入力欄にフォーカスを設定する関数
+    function setFocusToBarcodeInput() {
+      document.getElementById("barcode").focus();
+    }
+  </script>
+</body>
+</html>

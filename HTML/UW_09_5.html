@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品値段変更確認画面</title>
+  <link rel="stylesheet" href="../CSS/UW_09_1.css">
+  <script>
+    function deleteRow(button) {
+      // ボタンの親の行を取得して削除
+      const row = button.closest('tr');
+      row.parentNode.removeChild(row);
+    }
+  </script>
+</head>
+<body>
+  <div class="header">
+    <a href="./UW_09_3.html"><button class="btn" id="back-btn">戻る</button></a>
+    <h1>商品値段変更確認画面</h1>
+    <a href="./UW_09_7.html"><button class="btn" id="next-btn">確定</button></a>
+  </div>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>カテゴリー</th>
+        <th>単価</th>
+        <th>値段</th>
+        <th>削除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>123414</td>
+        <td>商品A</td>
+        <td>カテゴリ1</td>
+        <td>1000円</td>
+        <td>1200円</td>
+        <td><button onclick="deleteRow(this)">削除</button></td>
+      </tr>
+      <tr>
+        <td>123415</td>
+        <td>商品B</td>
+        <td>カテゴリ2</td>
+        <td>1500円</td>
+        <td>1800円</td>
+        <td><button onclick="deleteRow(this)">削除</button></td>
+      </tr>
+      <tr>
+        <td>123416</td>
+        <td>商品C</td>
+        <td>カテゴリ1</td>
+        <td>2000円</td>
+        <td>2400円</td>
+        <td><button onclick="deleteRow(this)">削除</button></td>
+      </tr>
+      <tr>
+        <td>123417</td>
+        <td>商品D</td>
+        <td>カテゴリ3</td>
+        <td>2500円</td>
+        <td>3000円</td>
+        <td><button onclick="deleteRow(this)">削除</button></td>
+      </tr>
+      <tr>
+        <td>123418</td>
+        <td>商品E</td>
+        <td>カテゴリ2</td>
+        <td>3000円</td>
+        <td>3600円</td>
+        <td><button onclick="deleteRow(this)">削除</button></td>
+      </tr>
+      <tr>
+        <td>123419</td>
+        <td>商品F</td>
+        <td>カテゴリ1</td>
+        <td>3500円</td>
+        <td>4200円</td>
+        <td><button onclick="deleteRow(this)">削除</button></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+

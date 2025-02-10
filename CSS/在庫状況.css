@@ -1,0 +1,136 @@
+/* 全体のスタイル */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+/* 在庫状況確認タイトルを中央に配置 */
+.header h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+}
+
+/* ボタン */
+.btn {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #bbb;
+}
+
+/* 入力エリアを横並びに配置 */
+.input-area {
+    display: flex;
+    justify-content: center; /* 要素を中央に配置 */
+    align-items: center;
+    margin: 20px 0;
+}
+
+.input-area label {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 250px; /* 幅を調整 */
+    margin-right: 10px; /* ボタンとの間にスペースを空ける */
+    font-size: 14px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* テーブルのスタイル */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+td input[type="text"],
+td input[type="number"] {
+    width: 90%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+td select {
+    width: 90%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* 発注ボタンの位置 */
+#order-btn {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+ /* セレクトボックスを右側に配置 */
+ .sort-area {
+    text-align: right; /* 右寄せ */
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+
+  .order-quantity {
+    width: 60px; /* テキストボックスの幅 */
+    padding: 4px; /* 内部の余白 */
+    font-size: 14px; /* フォントサイズを小さく */
+    text-align: center; /* テキストを中央に配置 */
+  }
+
+  .check-order {
+    transform: scale(1); /* チェックボックスを小さく表示 */
+    margin: 0; /* チェックボックスの周りの余白をなくす */
+  }
+
+  /* テーブルのセルの高さを調整して、行の高さを少し小さく */
+  td {
+    padding: 8px 12px; /* セルの内側の余白を調整 */
+  }
+
+  td .check-order {
+    transform: scale(1.2); /* チェックボックスのサイズ */
+    margin: 0; /* チェックボックスの周りの余白をなくす */
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え */
+    width: 100%; /* 幅を100%にして、セル内で中央に配置 */
+    height: 100%; /* 高さも100%にして、縦横中央に配置 */
+}
+
+td.price, td.stock {
+    text-align: right;
+}
